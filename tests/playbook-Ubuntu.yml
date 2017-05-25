@@ -9,11 +9,12 @@
 
 - hosts: 'all'
     vars:
-      - repo: 'ppa:jonathonf/font-rendering'
-      - repo: 'ppa:jonathonf/gtk3.24'
-    packages:
-      - name: 'libcairo2-dev'
-      - name: 'libharfbuzz-dev'
-      - name: 'libpango1.0-dev'
+      packages_repositories:
+        - repo: 'ppa:jonathonf/font-rendering'
+        - repo: 'ppa:jonathonf/gtk3.24'
+      packages:
+        - name: 'libcairo2-dev'
+        - name: 'libharfbuzz-dev'
+        - name: 'libpango1.0-dev'
   roles:
     - { role: 'ontic.packages' }
