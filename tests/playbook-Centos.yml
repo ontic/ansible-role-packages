@@ -8,5 +8,10 @@
 ---
 
 - hosts: 'all'
+  vars:
+    packages:
+      - name: 'cairo-devel'
+      - name: 'harfbuzz-devel'
+      - name: 'pango-devel'
   roles:
     - { role: 'ontic.packages' }
