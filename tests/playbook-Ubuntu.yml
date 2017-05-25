@@ -8,9 +8,9 @@
 ---
 
 - hosts: 'all'
-  vars:
-    - repo: 'ppa:jonathonf/font-rendering'
-    - repo: 'ppa:jonathonf/gtk3.24'
+    vars:
+      - repo: 'ppa:jonathonf/font-rendering'
+      - repo: 'ppa:jonathonf/gtk3.24'
     packages:
       - name: 'libcairo2-dev'
       - name: 'libharfbuzz-dev'
