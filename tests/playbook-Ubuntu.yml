@@ -9,9 +9,12 @@
 
 - hosts: 'all'
   vars:
+    packages_repositories:
+      - repo: 'deb http://ppa.launchpad.net/jonathonf/font-rendering/ubuntu xenial main'
+      - repo: 'deb http://ppa.launchpad.net/jonathonf/gtk3.24/ubuntu xenial main'
     packages:
-      - name: 'libcairo2-dev'
-      - name: 'libharfbuzz-dev'
-      - name: 'libpango1.0-dev'
+      - name: 'cairo'
+      - name: 'harfbuzz'
+      - name: 'pango1.0'
   roles:
     - { role: 'ontic.packages' }
