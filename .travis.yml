@@ -15,13 +15,13 @@ env:
     init: '/usr/lib/systemd/systemd'
     run_opts: '--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'
     role: 'ontic.packages'
-    playbook: 'playbook-Ubuntu.yml'
+    playbook: 'playbook-Centos.yml'
   - distribution: 'ubuntu'
     version: '16.04'
     init: '/lib/systemd/systemd'
     run_opts: '--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'
     role: 'ontic.packages'
-    playbook: 'playbook-Centos.yml'
+    playbook: 'playbook-Ubuntu.yml'
 
 services:
   - 'docker'
