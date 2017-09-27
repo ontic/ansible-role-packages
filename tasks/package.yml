@@ -49,7 +49,6 @@
     name: '{{ item.name if item.version is not defined else item.name + "=" + item.version }}'
     allow_unauthenticated: '{{ item.allow_unauthenticated | default(omit) }}'
     autoremove: '{{ item.autoremove | default(omit) }}'
-    allow_unauthenticated: '{{ item.allow_unauthenticated | default(omit) }}'
     cache_valid_time: '{{ item.cache_valid_time | default(omit) }}'
     deb: '{{ item.deb | default(omit) }}'
     default_release: '{{ item.default_release | default(omit) }}'
