@@ -8,4 +8,4 @@
     packages:
       - name: 'libpango1.0-dev'
   roles:
-    - { role: 'ontic.packages' }
+    - { role: 'role_under_test' }

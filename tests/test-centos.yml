@@ -8,4 +8,4 @@
     packages:
       - name: 'pango-devel'
   roles:
-    - { role: 'ontic.packages' }
+    - { role: 'role_under_test' }
