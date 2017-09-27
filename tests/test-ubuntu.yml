@@ -1,4 +1,11 @@
 # Copyright (c) Ontic. (http://www.ontic.com.au). All rights reserved.
 # See the COPYING file bundled with this package for license details.
 
-localhost
+---
+
+- hosts: 'localhost'
+  vars:
+    packages:
+      - name: 'libpango1.0-dev'
+  roles:
+    - { role: 'ontic.packages' }
