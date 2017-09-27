@@ -21,6 +21,7 @@
   file:
     path: '/etc/apt/preferences.d/{{ item.filename }}'
     state: 'absent'
+  register: 'packages_preferences_absent'
   with_items: '{{ packages_preferences }}'
   when: 'ansible_os_family == "Debian" and (packages_preferences | default(None) != None) and (item.state | default("present") == "absent")'
 
@@ -32,8 +33,15 @@
     owner: 'root'
     group: 'root'
     mode: '0644'
+  register: 'packages_preferences_present'
   with_items: '{{ packages_preferences }}'
   when: 'ansible_os_family == "Debian" and (packages_preferences | default(None) != None) and (item.state | default("present") == "present")'
+
+- name: 'Packages | Debian | Update APT repository cache.'
+  become: yes
+  apt:
+    update_cache: yes
+  when: 'ansible_os_family == "Debian" and (packages_preferences_absent.changed or packages_preferences_present.changed)'
 
 - name: 'Packages | Debian | Manage system packages.'
   become: yes
