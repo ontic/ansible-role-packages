@@ -25,7 +25,7 @@ before_install:
 
 script:
   - '${PWD}/tests/test.sh test'
-  - 'docker exec --tty ${container_id} env TERM=xterm pango-view --version'
+  - '${PWD}/tests/test.sh verify'
 
 notifications:
   webhooks: 'https://galaxy.ansible.com/api/v1/notifications/'
