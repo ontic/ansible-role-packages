@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+
+{% if item.pinning is defined %}
+{% for pinned_item in item.pinning %} 
+{% if pinned_item.package is defined and pinned_item.pin is defined and pinned_item.priority is defined %}
+
+Package: {{ pinned_item.package }}
+Pin: {{ pinned_item.pin }}
+Pin-Priority: {{ pinned_item.priority }}
+
+{% endif %}
+{% endfor %}
+{% endif %}

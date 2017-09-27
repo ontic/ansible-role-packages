@@ -3,10 +3,11 @@
 
 ---
 
-- name: 'PHP | Debian | Add launchpad PPA.'
+- name: 'Packages | Debian | Manage APT repositories.'
   become: yes
   apt_repository:
     repo: '{{ item.repo }}'
+    codename: '{{ item.codename | default(omit) }}'
     filename: '{{ item.filename | default(omit) }}'
     mode: '{{ item.mode | default(omit) }}'
     state: '{{ item.state | default(omit) }}'
@@ -15,10 +16,30 @@
   with_items: '{{ packages_repositories }}'
   when: 'ansible_os_family == "Debian" and packages_repositories | default(None) != None'
 
-- name: 'Packages | Debian | Install system packages.'
+- name: 'Packages | Debian | Manage absent APT preference files.'
+  become: yes
+  file:
+    path: '/etc/apt/preferences.d/{{ item.filename }}'
+    state: 'absent'
+  with_items: '{{ packages_preferences }}'
+  when: 'ansible_os_family == "Debian" and (packages_preferences | default(None) != None) and (item.state | default("present") == "absent")'
+
+- name: 'Packages | Debian | Manage present APT preference files.'
+  become: yes
+  template:
+    src: '{{ item.template | default("preferences.j2") }}'
+    dest: '/etc/apt/preferences.d/{{ item.filename }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  with_items: '{{ packages_preferences }}'
+  when: 'ansible_os_family == "Debian" and (packages_preferences | default(None) != None) and (item.state | default("present") == "present")'
+
+- name: 'Packages | Debian | Manage system packages.'
   become: yes
   apt:
     name: '{{ item.name if item.version is not defined else item.name + "=" + item.version }}'
+    allow_unauthenticated: '{{ item.allow_unauthenticated | default(omit) }}'
     autoremove: '{{ item.autoremove | default(omit) }}'
     allow_unauthenticated: '{{ item.allow_unauthenticated | default(omit) }}'
     cache_valid_time: '{{ item.cache_valid_time | default(omit) }}'
@@ -35,7 +56,7 @@
   with_items: '{{ packages }}'
   when: 'ansible_os_family == "Debian" and packages | default(None) != None'
 
-- name: 'Packages | RedHat | Install system packages.'
+- name: 'Packages | RedHat | Manage system packages.'
   become: yes
   yum:
     name: '{{ item.name if item.version is not defined else item.name + "-" + item.version }}'
@@ -46,6 +67,7 @@
     exclude: '{{ item.exclude | default(omit) }}'
     installroot: '{{ item.installroot | default(omit) }}'
     list: '{{ item.list | default(omit) }}'
+    skip_broken: '{{ item.skip_broken | default(omit) }}'
     state: '{{ item.state | default(omit) }}'
     update_cache: '{{ item.update_cache | default(omit) }}'
     validate_certs: '{{ item.validate_certs | default(omit) }}'

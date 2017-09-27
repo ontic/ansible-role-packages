@@ -5,6 +5,34 @@
 
 - hosts: 'localhost'
   vars:
+    packages_repositories:
+      - filename: 'debian'
+        repo: 'deb http://ftp.us.debian.org/debian/ stretch-backports main'
+      - filename: 'debian'
+        repo: 'deb-src http://ftp.us.debian.org/debian/ stretch-backports main'
+      - filename: 'debian'
+        repo: 'deb http://ftp.us.debian.org/debian/ testing main'
+      - filename: 'debian'
+        repo: 'deb-src http://ftp.us.debian.org/debian/ testing main'
+      - filename: 'debian'
+        repo: 'deb http://ftp.us.debian.org/debian/ unstable main'
+      - filename: 'debian'
+        repo: 'deb-src http://ftp.us.debian.org/debian/ unstable main'
+    packages_preferences:
+      - filename: 'debian'
+        pinning:
+          - package: '*'
+            pin: 'release a=stable'
+            priority: '700'
+          - package: '*'
+            pin: 'release a=stretch-backports'
+            priority: '650'
+          - package: '*'
+            pin: 'release a=testing'
+            priority: '600'
+          - package: '*'
+            pin: 'release a=unstable'
+            priority: '50'
     packages:
       - name: 'libpango1.0-dev'
   roles:
