@@ -29,10 +29,10 @@
             priority: '650'
           - package: '*'
             pin: 'release a=testing'
-            priority: '600'
+            priority: '-10'
           - package: '*'
             pin: 'release a=unstable'
-            priority: '50'
+            priority: '-10'
     packages:
       - name: 'libpango1.0-dev'
         default_release: 'testing'
