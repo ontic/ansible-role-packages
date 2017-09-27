@@ -35,5 +35,6 @@
             priority: '50'
     packages:
       - name: 'libpango1.0-dev'
+        default_release: 'testing'
   roles:
     - { role: 'role_under_test' }
