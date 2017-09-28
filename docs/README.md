@@ -33,6 +33,7 @@ packages_preferences:
         priority: '-10'
 packages:
   - name: 'libpango1.0-dev'
+    default_release: 'testing'
 ```
 
 ## Role Variables
@@ -59,6 +60,8 @@ A list of the package preferences to define. Each preference supports the follow
   * `pin` the rule determining how the package is pinned.
   * `priority` the priority assigned to packages matching the rule.
 
+For details on how to control which versions of packages will be selected for installation, visit the
+[apt_preferences](https://linux.die.net/man/5/apt_preferences) man page.
 
 ```
 packages:
