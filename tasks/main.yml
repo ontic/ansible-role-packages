@@ -3,7 +3,7 @@
 
 ---
 
-- include: 'package.yml'
+- import_tasks: 'package.yml'
   tags:
     - 'packages'
     - 'packages-package'
